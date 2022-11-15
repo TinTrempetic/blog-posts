@@ -7,6 +7,7 @@ import { PostComponent } from './containers/post/post.component';
 import { PostListComponent } from './containers/post-list/post-list.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HeaderComponent } from './components/header/header.component';
+import { PostListItemComponent } from './components/post-list-item/post-list-item.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HeaderComponent } from './components/header/header.component';
     PostComponent,
     PostListComponent,
     LayoutComponent,
-    HeaderComponent
+    HeaderComponent,
+    PostListItemComponent
   ],
   imports: [
     BrowserModule,
