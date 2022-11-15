@@ -1,1 +1,23 @@
-<p>post-list-item works!</p>
+<div class="post-item">
+  <div class="image-container">
+    <img [src]="post.imageSrc" class="image" />
+  </div>
+
+  <div class="post-summary">
+    <div class="title">
+      <strong>
+        {{ post.title }}
+      </strong>
+    </div>
+
+    <div class="author-name">
+      <strong>
+        {{ post.authorName }}
+      </strong>
+    </div>
+
+    <div class="content">
+      {{ test }}
+    </div>
+  </div>
+</div>

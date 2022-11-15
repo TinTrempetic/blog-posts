@@ -1,0 +1,39 @@
+.post-item {
+  display: flex;
+  padding: 20px;
+  height: 100px;
+}
+
+.image-container {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  object-fit: contain;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.post-summary {
+  display: block;
+  margin-left: 20px;
+  width: 80%;
+}
+
+.title {
+  padding-bottom: 5px;
+  font-size: 20px;
+}
+
+.author-name {
+  padding-bottom: 5px;
+  font-size: 18px;
+}
+
+.content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

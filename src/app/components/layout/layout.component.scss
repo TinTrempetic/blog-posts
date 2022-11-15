@@ -2,7 +2,7 @@
   margin-bottom: 20px;
   display: grid;
   grid-template-rows: [row-start] 70px [row-2] auto [row-3] 50px [row-end];
-  grid-template-columns: [col-start] 50px [col-2] auto [col-3] 50px [col-end];
+  grid-template-columns: [col-start] 100px [col-2] calc(100% - 200px) [col-3] 100px [col-end];
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -13,9 +13,10 @@
   grid-row-end: row-2;
   grid-column-start: col-start;
   grid-column-end: col-end;
-  height: 100%;
   width: 100%;
-  background-color: red;
+  position: fixed;
+  background-color: white;
+  top: 0;
 }
 
 .posts {
@@ -25,5 +26,4 @@
   grid-column-end: col-3;
   height: 100%;
   width: 100%;
-  background-color: purple;
 }
