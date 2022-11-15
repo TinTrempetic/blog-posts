@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FakeServerHttpService } from 'src/app/services/fake-server.http-service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { PostsFacade } from 'src/app/facade/posts.facade';
 import { Post } from 'src/app/types';
 
 @Component({
@@ -8,12 +8,10 @@ import { Post } from 'src/app/types';
   styleUrls: ['./post-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostListComponent implements OnInit {
-  posts$ = this.fakeServerService.getAllPosts();
+export class PostListComponent {
+  postsVm$ = this.facade.postsVm$;
 
-  constructor(private fakeServerService: FakeServerHttpService) {}
-
-  ngOnInit(): void {}
+  constructor(private facade: PostsFacade) {}
 
   trackById(index: number, item: Post) {
     return item.id;

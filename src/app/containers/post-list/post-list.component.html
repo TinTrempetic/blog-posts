@@ -1,8 +1,10 @@
-<ng-container *ngFor="let post of posts$ | async; trackBy: trackById">
-  <div class="post">
-    <post-list-item
-      [post]="post"
-      routerLink="../post/{{ post.id }}"
-    ></post-list-item>
-  </div>
+<ng-container *ngIf="postsVm$ | async as vm">
+  <ng-container *ngFor="let post of vm.allPosts; trackBy: trackById">
+    <div class="post">
+      <post-list-item
+        [post]="post"
+        routerLink="../post/{{ post.id }}"
+      ></post-list-item>
+    </div>
+  </ng-container>
 </ng-container>
