@@ -13,4 +13,8 @@ export class FakeServerHttpService {
   public getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(endpoints.posts);
   }
+
+  public getPostById(id: number): Observable<Post> {
+    return this.http.get<Post>(`${endpoints.posts}/${id}`);
+  }
 }

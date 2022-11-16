@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, switchMap, tap } from 'rxjs';
+import { distinctUntilChanged, filter, Subject, switchMap, tap } from 'rxjs';
 import { FakeServerHttpService } from '../../services/fake-server.http-service';
 import { StateService } from '../../shared/state.service';
 import { Post } from '../../types';
@@ -7,24 +7,44 @@ import { Post } from '../../types';
 interface BlogPostState {
   loaded: boolean;
   posts: Post[];
+  selectedPostLoaded: boolean;
+  selectedPost?: Post;
 }
 
 const initialState: BlogPostState = {
   loaded: false,
   posts: [],
+  selectedPostLoaded: false,
 };
 
 @Injectable()
 export class BlogPostStateService extends StateService<BlogPostState> {
-  loaded$ = this.select((state) => state.loaded);
+  allPostsLoaded$ = this.select((state) => state.loaded);
   posts$ = this.select((state) => state.posts);
 
+  selectedPostLoaded$ = this.select((state) => state.selectedPostLoaded);
+  selectedPost$ = this.select((state) => state.selectedPost);
+
   private _loadAllPostsAction = new Subject<void>();
-  private loadAllPostsAction$ = this._loadAllPostsAction.asObservable().pipe(
+  loadAllPostsAction$ = this._loadAllPostsAction.asObservable().pipe(
+    tap(() => this.setAllPostsLoadedState(false)),
     switchMap(() => this.service.getAllPosts()),
     tap((posts) => {
       this.setPostsState(posts);
-      this.setLoadedState(true);
+      this.setAllPostsLoadedState(true);
+    })
+  );
+
+  private _loadPostByIdAction = new Subject<number>();
+  loadPostByIdAction$ = this._loadPostByIdAction.asObservable().pipe(
+    distinctUntilChanged(),
+    tap(() => this.setSelectedPostState(undefined)),
+    filter((id) => !!id),
+    tap(() => this.setSelectedPostLoadedState(false)),
+    switchMap((id) => this.service.getPostById(id)),
+    tap((post) => {
+      this.setSelectedPostState(post);
+      this.setSelectedPostLoadedState(true);
     })
   );
 
@@ -32,17 +52,30 @@ export class BlogPostStateService extends StateService<BlogPostState> {
     super(initialState);
 
     this.loadAllPostsAction$.subscribe();
+    this.loadPostByIdAction$.subscribe();
   }
 
   loadAllPosts(): void {
     this._loadAllPostsAction.next();
   }
 
+  loadPostById(id: number): void {
+    this._loadPostByIdAction.next(id);
+  }
+
   private setPostsState(posts: Post[]): void {
     this.setState({ posts });
   }
 
-  private setLoadedState(loaded: boolean): void {
+  private setAllPostsLoadedState(loaded: boolean): void {
     this.setState({ loaded });
+  }
+
+  private setSelectedPostState(selectedPost: Post | undefined): void {
+    this.setState({ selectedPost });
+  }
+
+  private setSelectedPostLoadedState(selectedPostLoaded: boolean): void {
+    this.setState({ selectedPostLoaded });
   }
 }

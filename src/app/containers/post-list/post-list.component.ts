@@ -18,7 +18,7 @@ export class PostListComponent extends SubscribableBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.state.loaded$
+    this.state.allPostsLoaded$
       .pipe(
         filter((loaded) => !loaded),
         tap(() => this.state.loadAllPosts()),
