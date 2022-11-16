@@ -38,7 +38,7 @@ export class BlogPostStateService extends StateService<BlogPostState> {
   private _loadPostByIdAction = new Subject<number>();
   loadPostByIdAction$ = this._loadPostByIdAction.asObservable().pipe(
     distinctUntilChanged(),
-    tap(() => this.setSelectedPostState(undefined)),
+    tap(() => this.resetSelectedPostState()),
     filter((id) => !!id),
     tap(() => this.setSelectedPostLoadedState(false)),
     switchMap((id) => this.service.getPostById(id)),
@@ -61,6 +61,11 @@ export class BlogPostStateService extends StateService<BlogPostState> {
 
   loadPostById(id: number): void {
     this._loadPostByIdAction.next(id);
+  }
+
+  private resetSelectedPostState(): void {
+    this.setSelectedPostLoadedState(false);
+    this.setSelectedPostState(undefined);
   }
 
   private setPostsState(posts: Post[]): void {

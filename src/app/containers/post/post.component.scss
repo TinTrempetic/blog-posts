@@ -1,0 +1,21 @@
+.image-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.image {
+  object-fit: contain;
+  max-height: 25vh;
+  max-width: 100%;
+}
+
+.title {
+  padding: 30px 0px;
+  text-align: center;
+  word-break: break-word;
+}
+
+.post-content {
+  word-break: break-word;
+}
