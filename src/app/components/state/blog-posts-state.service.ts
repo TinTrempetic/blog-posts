@@ -40,7 +40,6 @@ export class BlogPostStateService extends StateService<BlogPostState> {
     distinctUntilChanged(),
     tap(() => this.resetSelectedPostState()),
     filter((id) => !!id),
-    tap(() => this.setSelectedPostLoadedState(false)),
     switchMap((id) => this.service.getPostById(id)),
     tap((post) => {
       this.setSelectedPostState(post);
