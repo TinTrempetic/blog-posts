@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PostsFacade } from 'src/app/facade/posts.facade';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { filter, takeUntil, tap } from 'rxjs';
+import { BlogPostStateService } from 'src/app/components/state/blog-posts-state.service';
+import { SubscribableBase } from 'src/app/shared/subscribable-base';
 import { Post } from 'src/app/types';
 
 @Component({
@@ -8,10 +10,22 @@ import { Post } from 'src/app/types';
   styleUrls: ['./post-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PostListComponent {
-  postsVm$ = this.facade.postsVm$;
+export class PostListComponent extends SubscribableBase implements OnInit {
+  posts$ = this.state.posts$;
 
-  constructor(private facade: PostsFacade) {}
+  constructor(private state: BlogPostStateService) {
+    super();
+  }
+
+  ngOnInit(): void {
+    this.state.loaded$
+      .pipe(
+        filter((loaded) => !loaded),
+        tap(() => this.state.loadAllPosts()),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
+  }
 
   trackById(index: number, item: Post) {
     return item.id;

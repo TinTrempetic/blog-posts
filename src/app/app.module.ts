@@ -9,9 +9,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { PostListFiltersComponent } from './components/post-list-filters/post-list-filters.component';
 import { PostListItemComponent } from './components/post-list-item/post-list-item.component';
+import { BlogPostStateService } from './components/state/blog-posts-state.service';
 import { PostListComponent } from './containers/post-list/post-list.component';
 import { PostComponent } from './containers/post/post.component';
-import { PostsFacade } from './facade/posts.facade';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { PostsFacade } from './facade/posts.facade';
     PostListFiltersComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, CommonModule],
-  providers: [PostsFacade],
+  providers: [BlogPostStateService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
