@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Post } from 'src/app/types';
+import { Post } from 'libs/blog-posts/types';
 
 @Component({
   selector: 'post-list-item',

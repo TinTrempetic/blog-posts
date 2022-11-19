@@ -63,5 +63,97 @@
       "authorName": "Author 9",
       "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/2048px-Windows_logo_-_2012.svg.png"
     }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 2
+    },
+    {
+      "id": 3,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 3
+    },
+    {
+      "id": 4,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 4
+    },
+    {
+      "id": 5,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 4
+    },
+    {
+      "id": 6,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 4
+    },
+    {
+      "id": 7,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 5
+    },
+    {
+      "id": 8,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 5
+    },
+    {
+      "id": 9,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 6
+    },
+    {
+      "id": 10,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 7
+    },
+    {
+      "id": 11,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 7
+    },
+    {
+      "id": 12,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 7
+    },
+    {
+      "id": 13,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 9
+    },
+    {
+      "id": 14,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 9
+    },
+    {
+      "id": 15,
+      "authorName": "Author 1",
+      "text": "Comment 1",
+      "postId": 9
+    }
   ]
 }

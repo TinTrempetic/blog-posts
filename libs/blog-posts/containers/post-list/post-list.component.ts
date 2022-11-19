@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BlogPostStateService } from 'libs/blog-posts/services/blog-posts-state.service';
+import { Post } from 'libs/blog-posts/types';
+import { SubscribableBase } from 'libs/shared/subscribable-base';
 import { filter, takeUntil, tap } from 'rxjs';
-import { BlogPostStateService } from 'src/app/components/state/blog-posts-state.service';
-import { SubscribableBase } from 'src/app/shared/subscribable-base';
-import { Post } from 'src/app/types';
 
 @Component({
   selector: 'post-list',

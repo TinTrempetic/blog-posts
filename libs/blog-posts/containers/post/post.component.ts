@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BlogPostStateService } from 'libs/blog-posts/services/blog-posts-state.service';
+import { SubscribableBase } from 'libs/shared/subscribable-base';
 import { filter, map, takeUntil, tap } from 'rxjs';
-import { BlogPostStateService } from 'src/app/components/state/blog-posts-state.service';
-import { SubscribableBase } from 'src/app/shared/subscribable-base';
 
 @Component({
   selector: 'post',

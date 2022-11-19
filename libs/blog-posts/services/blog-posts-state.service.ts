@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { FakeServerHttpService } from 'libs/blog-posts/services/fake-server.http-service';
+import { StateService } from 'libs/shared/state.service';
 import { distinctUntilChanged, filter, Subject, switchMap, tap } from 'rxjs';
-import { FakeServerHttpService } from '../../services/fake-server.http-service';
-import { StateService } from '../../shared/state.service';
-import { Post } from '../../types';
+import { Post } from '../types';
 
 interface BlogPostState {
   loaded: boolean;
@@ -21,7 +21,6 @@ const initialState: BlogPostState = {
 export class BlogPostStateService extends StateService<BlogPostState> {
   allPostsLoaded$ = this.select((state) => state.loaded);
   posts$ = this.select((state) => state.posts);
-
   selectedPostLoaded$ = this.select((state) => state.selectedPostLoaded);
   selectedPost$ = this.select((state) => state.selectedPost);
 
