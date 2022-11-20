@@ -1,27 +1,23 @@
 import { Injectable } from '@angular/core';
 import { FakeServerHttpService } from 'libs/shared/fake-server.http-service';
 import { StateService } from 'libs/shared/state.service';
-import {
-  combineLatest,
-  map,
-  Observable,
-  of,
-  Subject,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { combineLatest, map, Observable, of, Subject, switchMap } from 'rxjs';
 import { Comment } from '../types';
 
 interface CommentsState {
+  loading: Map<number, boolean>;
   comments: Map<number, Comment[]>;
 }
 
 const initialState: CommentsState = {
+  loading: new Map<number, boolean>(),
   comments: new Map<number, Comment[]>(),
 };
 
 @Injectable()
 export class CommentsStateService extends StateService<CommentsState> {
+  loading$ = this.select((state) => state.loading);
+
   private allComments$ = this.select((state) => state.comments);
 
   private _loadCommentsByPostIdAction = new Subject<number>();
@@ -85,9 +81,15 @@ export class CommentsStateService extends StateService<CommentsState> {
     this._loadCommentsByPostIdAction.next(id);
   }
 
+  getCommentsLoadedByPostId(postId: number): Observable<boolean> {
+    return this.select((state) => state.comments.has(postId));
+    // .pipe(
+    //   map((comments) => !!comments)
+    // );
+  }
+
   getCommentsByPostId(postId: number): Observable<Comment[]> {
     return this.select((state) => state.comments.get(postId)).pipe(
-      tap(() => console.log('selecting for id', postId)),
       map((comments) => comments ?? [])
     );
   }

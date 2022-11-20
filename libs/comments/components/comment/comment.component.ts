@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Comment } from 'libs/comments/types';
 
 @Component({
   selector: 'comment',
@@ -6,6 +7,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./comment.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommentComponent implements OnInit {
-  ngOnInit(): void {}
+export class CommentComponent {
+  @Input() comment: Comment;
 }

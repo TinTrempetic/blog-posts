@@ -1,7 +1,35 @@
-<ng-container *ngIf="!showComments; else comments">
-  <div (click)="showCommentsHandler()">Show comments</div>
-</ng-container>
+<div class="container">
+  <ng-container *ngIf="!showComments; else comments">
+    <div class="show-comments" (click)="showCommentsHandler()">
+      <span class="show-comments-text">Show comments</span>
+    </div>
+  </ng-container>
 
-<ng-template #comments>
-  {{ commentsByPostId$ | async | json }}
+  <ng-template #comments>
+    <ng-container
+      *ngIf="{
+        comments: commentsByPostId$ | async,
+        loaded: loaded$ | async
+      } as data"
+    >
+      <ng-container *ngIf="!data.loaded; else commentsLoaded"
+        ><div class="loading">
+          <span>Loading...</span>
+        </div></ng-container
+      >
+      <ng-template #commentsLoaded>
+        <ng-container *ngIf="data.comments!.length; else noCommentsTemplate">
+          <ng-container *ngFor="let comment of data.comments">
+            <div class="comment-container">
+              <comment [comment]="comment"></comment>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-template>
+    </ng-container>
+  </ng-template>
+</div>
+
+<ng-template #noCommentsTemplate>
+  <div>No comments</div>
 </ng-template>

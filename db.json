@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Post 1",
       "content": "Description 1",
-      "authorName": "Author 1",
+      "authorName": "Comment Author",
       "imageSrc": "https://repository-images.githubusercontent.com/24195339/87018c00-694b-11e9-8b5f-c34826306d36"
     },
     {
@@ -67,92 +67,92 @@
   "comments": [
     {
       "id": 1,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 1 comment",
       "postId": 1
     },
     {
       "id": 2,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 2 comment",
       "postId": 2
     },
     {
       "id": 3,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 3 comment",
       "postId": 3
     },
     {
       "id": 4,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 4 comment",
       "postId": 4
     },
     {
       "id": 5,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 4 comment",
       "postId": 4
     },
     {
       "id": 6,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 4 comment",
       "postId": 4
     },
     {
       "id": 7,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 5 comment",
       "postId": 5
     },
     {
       "id": 8,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 5 comment",
       "postId": 5
     },
     {
       "id": 9,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 6 comment",
       "postId": 6
     },
     {
       "id": 10,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 7 comment",
       "postId": 7
     },
     {
       "id": 11,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 7 comment",
       "postId": 7
     },
     {
       "id": 12,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 7 comment",
       "postId": 7
     },
     {
       "id": 13,
-      "authorName": "Author 1",
-      "text": "Comment 1",
-      "postId": 9
+      "authorName": "Comment Author",
+      "text": "Post 8 comment",
+      "postId": 8
     },
     {
       "id": 14,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 9 comment",
       "postId": 9
     },
     {
       "id": 15,
-      "authorName": "Author 1",
-      "text": "Comment 1",
+      "authorName": "Comment Author",
+      "text": "Post 9 comment",
       "postId": 9
     }
   ]

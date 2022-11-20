@@ -1,11 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommentsStateService } from 'libs/comments/services/comments-state.service';
-import { BehaviorSubject, distinctUntilChanged, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'comments',
@@ -13,25 +8,30 @@ import { BehaviorSubject, distinctUntilChanged, switchMap, tap } from 'rxjs';
   styleUrls: ['./comments.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommentsComponent implements OnInit {
+export class CommentsComponent {
   showComments = false;
 
   @Input() postId: number;
 
+  private loaded = new BehaviorSubject<number>(0);
+  loaded$ = this.loaded
+    .asObservable()
+    .pipe(switchMap((postId) => this.store.getCommentsLoadedByPostId(postId)));
+
   private commentsByPostId = new BehaviorSubject<number>(0);
   commentsByPostId$ = this.commentsByPostId.asObservable().pipe(
-    distinctUntilChanged(),
-    tap(() => this.store.loadCommentsByPostId(this.postId)),
+    tap(() => {
+      this.store.loadCommentsByPostId(this.postId);
+    }),
     switchMap(() => this.store.getCommentsByPostId(this.postId))
   );
 
   constructor(private store: CommentsStateService) {}
 
-  ngOnInit(): void {}
-
   showCommentsHandler(): void {
     this.showComments = true;
 
     this.commentsByPostId.next(this.postId);
+    this.loaded.next(this.postId);
   }
 }

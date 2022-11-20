@@ -1,0 +1,30 @@
+.container {
+  min-height: 50px;
+}
+
+.show-comments {
+  width: 100%;
+  color: dodgerblue;
+  font-size: 20px;
+  text-align: center;
+}
+
+.show-comments-text:hover {
+  background-color: lightsteelblue;
+}
+
+.comment-container {
+  width: 100%;
+  min-height: 30px;
+}
+
+.comment-container:last-child {
+  padding-bottom: 25px;
+}
+
+.loading {
+  width: 100%;
+  color: dodgerblue;
+  font-size: 20px;
+  text-align: center;
+}
