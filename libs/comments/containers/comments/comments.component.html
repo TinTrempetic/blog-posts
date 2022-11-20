@@ -19,7 +19,9 @@
       >
       <ng-template #commentsLoaded>
         <ng-container *ngIf="data.comments!.length; else noCommentsTemplate">
-          <ng-container *ngFor="let comment of data.comments">
+          <ng-container
+            *ngFor="let comment of data.comments; trackBy: trackById"
+          >
             <div class="comment-container">
               <comment [comment]="comment"></comment>
             </div>

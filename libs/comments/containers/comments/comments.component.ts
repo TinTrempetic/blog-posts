@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommentsStateService } from 'libs/comments/services/comments-state.service';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import { Comment } from '../../types';
 
 @Component({
   selector: 'comments',
@@ -33,5 +34,9 @@ export class CommentsComponent {
 
     this.commentsByPostId.next(this.postId);
     this.loaded.next(this.postId);
+  }
+
+  trackById(index: number, item: Comment) {
+    return item.id;
   }
 }

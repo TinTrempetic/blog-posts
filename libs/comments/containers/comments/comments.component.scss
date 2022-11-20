@@ -14,8 +14,13 @@
 }
 
 .comment-container {
+  cursor: auto;
   width: 100%;
   min-height: 30px;
+}
+
+.comment-container:not(:first-child) {
+  border-top: 2px solid lightsteelblue;
 }
 
 .comment-container:last-child {
