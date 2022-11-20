@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
-import { FakeServerHttpService } from 'libs/shared/fake-server.http-service';
-import { StateService } from 'libs/shared/state.service';
-import { distinctUntilChanged, filter, Subject, switchMap, tap } from 'rxjs';
-import { Post } from '../types';
+import { StateService } from 'libs/shared/core/state.service';
+import { FakeServerHttpService } from 'libs/shared/services/fake-server-http.service';
+import {
+  BehaviorSubject,
+  combineLatest,
+  distinctUntilChanged,
+  filter,
+  map,
+  Subject,
+  switchMap,
+  tap,
+} from 'rxjs';
+import { Post, PostFilters } from '../types';
 
 interface BlogPostState {
   loaded: boolean;
@@ -23,6 +32,8 @@ export class BlogPostStateService extends StateService<BlogPostState> {
   posts$ = this.select((state) => state.posts);
   selectedPostLoaded$ = this.select((state) => state.selectedPostLoaded);
   selectedPost$ = this.select((state) => state.selectedPost);
+
+  filters$ = new BehaviorSubject<PostFilters | null>(null);
 
   private _loadAllPostsAction = new Subject<void>();
   loadAllPostsAction$ = this._loadAllPostsAction.asObservable().pipe(
@@ -46,6 +57,29 @@ export class BlogPostStateService extends StateService<BlogPostState> {
     })
   );
 
+  filteredPosts$ = combineLatest([this.posts$, this.filters$]).pipe(
+    map(([posts, filters]) => {
+      return { posts, filters };
+    }),
+    switchMap(({ posts, filters }) => {
+      let filteredPosts = [...posts];
+
+      if (!!filters?.userId)
+        filteredPosts = filteredPosts.filter(
+          (post) => post.userId === filters.userId
+        );
+
+      if (filters?.searchText.length)
+        filteredPosts = filteredPosts.filter(
+          (post) =>
+            post.title.includes(filters.searchText) ||
+            post.body.includes(filters.searchText)
+        );
+
+      return [filteredPosts];
+    })
+  );
+
   constructor(private service: FakeServerHttpService) {
     super(initialState);
 
@@ -59,6 +93,10 @@ export class BlogPostStateService extends StateService<BlogPostState> {
 
   loadPostById(id: number): void {
     this._loadPostByIdAction.next(id);
+  }
+
+  filterPosts(filters: PostFilters): void {
+    this.filters$.next(filters);
   }
 
   private resetSelectedPostState(): void {

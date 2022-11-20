@@ -1,1 +1,17 @@
-<p>post-list-filters works!</p>
+<form [formGroup]="filterForm" (ngSubmit)="filterPosts()">
+  <div class="container">
+    <div class="search-text control">
+      <text-input formControlName="searchText"></text-input>
+    </div>
+    <div class="control">
+      <dropdown
+        [label]="dropdownLabel"
+        formControlName="userId"
+        [options]="dropdownOptions"
+      ></dropdown>
+    </div>
+    <div class="control">
+      <app-button label="Filter" (onClick)="filterPosts()"></app-button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,17 @@
+<div class="dropdown">
+  <button
+    class="btn btn-light dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    {{ label }}
+  </button>
+  <ul class="dropdown-menu">
+    <ng-container *ngFor="let option of options">
+      <li (click)="optionSelectedHandler(option.value)">
+        <a class="dropdown-item">{{ option.label }}</a>
+      </li>
+    </ng-container>
+  </ul>
+</div>

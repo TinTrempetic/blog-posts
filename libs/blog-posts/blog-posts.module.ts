@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { CommentsModule } from 'libs/comments/comments.module';
+import { SharedModule } from 'libs/shared/shared.module';
 import { UsersModule } from 'libs/users/users.module';
 import { PostListFiltersComponent } from './components/post-list-filters/post-list-filters.component';
 import { PostListItemComponent } from './components/post-list-item/post-list-item.component';
@@ -26,6 +28,8 @@ const routes: Routes = [
     CommonModule,
     CommentsModule,
     UsersModule,
+    ReactiveFormsModule,
+    SharedModule,
     RouterModule.forChild(routes),
   ],
   providers: [BlogPostStateService],

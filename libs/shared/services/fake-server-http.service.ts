@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'libs/users/types';
 import { Observable } from 'rxjs';
-import { Post } from '../blog-posts/types';
-import { Comment } from '../comments/types';
+import { Post } from '../../blog-posts/types';
+import { Comment } from '../../comments/types';
 import { endpoints } from './fake-server.endpoints';
 
 @Injectable({

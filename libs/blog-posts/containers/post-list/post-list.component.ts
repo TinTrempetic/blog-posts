@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BlogPostStateService } from 'libs/blog-posts/services/blog-posts-state.service';
-import { Post } from 'libs/blog-posts/types';
-import { SubscribableBase } from 'libs/shared/subscribable-base';
+import { Post, PostFilters } from 'libs/blog-posts/types';
+import { SubscribableBase } from 'libs/shared/core/subscribable-base';
 import { UserStateService } from 'libs/users/service/user-state.service';
 import { filter, takeUntil, tap } from 'rxjs';
 
@@ -12,8 +12,7 @@ import { filter, takeUntil, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostListComponent extends SubscribableBase implements OnInit {
-  posts$ = this.blogPostState.posts$;
-
+  posts$ = this.blogPostState.filteredPosts$;
   users$ = this.userState.users$;
 
   constructor(
@@ -35,5 +34,9 @@ export class PostListComponent extends SubscribableBase implements OnInit {
 
   trackById(index: number, item: Post) {
     return item.id;
+  }
+
+  filterHandler(filters: PostFilters): void {
+    this.blogPostState.filterPosts(filters);
   }
 }

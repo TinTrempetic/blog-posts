@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FakeServerHttpService } from 'libs/shared/fake-server.http-service';
-import { StateService } from 'libs/shared/state.service';
+import { StateService } from 'libs/shared/core/state.service';
+import { FakeServerHttpService } from 'libs/shared/services/fake-server-http.service';
 import { combineLatest, map, Observable, of, Subject, switchMap } from 'rxjs';
 import { Comment } from '../types';
 
