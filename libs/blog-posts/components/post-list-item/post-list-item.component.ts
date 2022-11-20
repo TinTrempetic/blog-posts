@@ -9,4 +9,5 @@ import { Post } from 'libs/blog-posts/types';
 })
 export class PostListItemComponent {
   @Input() post: Post;
+  @Input() authorName: string;
 }

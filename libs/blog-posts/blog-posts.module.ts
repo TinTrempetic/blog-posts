@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommentsModule } from 'libs/comments/comments.module';
+import { UsersModule } from 'libs/users/users.module';
 import { PostListFiltersComponent } from './components/post-list-filters/post-list-filters.component';
 import { PostListItemComponent } from './components/post-list-item/post-list-item.component';
 import { PostListComponent } from './containers/post-list/post-list.component';
@@ -21,7 +22,12 @@ const routes: Routes = [
     PostListFiltersComponent,
     PostListItemComponent,
   ],
-  imports: [CommonModule, CommentsModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    CommentsModule,
+    UsersModule,
+    RouterModule.forChild(routes),
+  ],
   providers: [BlogPostStateService],
 })
 export class BlogPostsModule {}

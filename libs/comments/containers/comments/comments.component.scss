@@ -3,6 +3,7 @@
 }
 
 .show-comments {
+  cursor: auto;
   width: 100%;
   color: dodgerblue;
   font-size: 20px;
@@ -10,6 +11,7 @@
 }
 
 .show-comments-text:hover {
+  cursor: pointer;
   background-color: lightsteelblue;
 }
 

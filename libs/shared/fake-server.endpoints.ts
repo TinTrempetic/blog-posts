@@ -1,5 +1,5 @@
 export const endpoints = {
-  posts: 'https://my-json-server.typicode.com/tintrempetic/blog-posts/posts',
-  comments:
-    'https://my-json-server.typicode.com/tintrempetic/blog-posts/comments',
+  posts: 'https://jsonplaceholder.typicode.com/posts',
+  comments: 'https://jsonplaceholder.typicode.com/comments',
+  users: 'https://jsonplaceholder.typicode.com/users',
 };

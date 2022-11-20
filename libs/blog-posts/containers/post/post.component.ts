@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogPostStateService } from 'libs/blog-posts/services/blog-posts-state.service';
 import { SubscribableBase } from 'libs/shared/subscribable-base';
+import { UserStateService } from 'libs/users/service/user-state.service';
 import { filter, map, takeUntil, tap } from 'rxjs';
 
 @Component({
@@ -11,11 +12,13 @@ import { filter, map, takeUntil, tap } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostComponent extends SubscribableBase implements OnInit {
-  post$ = this.state.selectedPost$;
+  post$ = this.blogPostState.selectedPost$;
+  users$ = this.userState.users$;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private state: BlogPostStateService
+    private userState: UserStateService,
+    private blogPostState: BlogPostStateService
   ) {
     super();
   }
@@ -25,7 +28,7 @@ export class PostComponent extends SubscribableBase implements OnInit {
       .pipe(
         map((params) => params['postId']),
         filter((id) => !!id),
-        tap((id: number) => this.state.loadPostById(id)),
+        tap((id: number) => this.blogPostState.loadPostById(id)),
         takeUntil(this.destroy$)
       )
       .subscribe();

@@ -83,9 +83,6 @@ export class CommentsStateService extends StateService<CommentsState> {
 
   getCommentsLoadedByPostId(postId: number): Observable<boolean> {
     return this.select((state) => state.comments.has(postId));
-    // .pipe(
-    //   map((comments) => !!comments)
-    // );
   }
 
   getCommentsByPostId(postId: number): Observable<Comment[]> {

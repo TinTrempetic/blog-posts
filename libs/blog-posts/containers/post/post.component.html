@@ -1,16 +1,18 @@
-<ng-container *ngIf="post$ | async as post">
-  <div class="image-container">
-    <img [src]="post.imageSrc" class="image" />
-  </div>
+<ng-container *ngIf="users$ | async as users">
+  <ng-container *ngIf="post$ | async as post">
+    <div class="title">
+      <h1>{{ post.title }}</h1>
+      <h3>{{ post.userId | userNameById: users }}</h3>
+    </div>
 
-  <div class="title">
-    <h1>{{ post.title }}</h1>
-    <h3>{{ post.authorName }}</h3>
-  </div>
+    <div class="post-content">
+      <p>
+        {{ post.body }}
+      </p>
+    </div>
 
-  <div class="post-content">
-    <p>
-      {{ post.content }}
-    </p>
-  </div>
+    <div class="comments">
+      <comments [postId]="post.id" [showComments]="true"></comments>
+    </div>
+  </ng-container>
 </ng-container>

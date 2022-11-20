@@ -1,7 +1,9 @@
 <div class="container">
   <ng-container *ngIf="!showComments; else comments">
-    <div class="show-comments" (click)="showCommentsHandler()">
-      <span class="show-comments-text">Show comments</span>
+    <div class="show-comments">
+      <span class="show-comments-text" (click)="showCommentsHandler()"
+        >Show comments</span
+      >
     </div>
   </ng-container>
 

@@ -1,25 +1,14 @@
 .post-item {
   display: flex;
   padding: 20px;
-  height: 100px;
-}
-
-.image-container {
-  width: 20%;
-  display: flex;
-  justify-content: center;
-}
-
-.image {
-  object-fit: contain;
-  max-height: 100%;
-  max-width: 100%;
+  min-height: 100px;
+  height: fit-content;
 }
 
 .post-summary {
   display: block;
   margin-left: 20px;
-  width: 80%;
+  width: 90%;
 }
 
 .title {
