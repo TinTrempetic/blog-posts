@@ -4,5 +4,6 @@
       [post]="post"
       routerLink="../post/{{ post.id }}"
     ></post-list-item>
+    <comments [postId]="post.id"></comments>
   </div>
 </ng-container>

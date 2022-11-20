@@ -1,0 +1,7 @@
+<ng-container *ngIf="!showComments; else comments">
+  <div (click)="showCommentsHandler()">Show comments</div>
+</ng-container>
+
+<ng-template #comments>
+  {{ commentsByPostId$ | async | json }}
+</ng-template>

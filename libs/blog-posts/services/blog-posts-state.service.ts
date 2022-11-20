@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FakeServerHttpService } from 'libs/blog-posts/services/fake-server.http-service';
+import { FakeServerHttpService } from 'libs/shared/fake-server.http-service';
 import { StateService } from 'libs/shared/state.service';
 import { distinctUntilChanged, filter, Subject, switchMap, tap } from 'rxjs';
 import { Post } from '../types';
