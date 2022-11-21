@@ -1,49 +1,47 @@
 import { Injectable } from '@angular/core';
 import { StateService } from 'libs/shared/core/state.service';
 import { FakeServerHttpService } from 'libs/shared/services/fake-server-http.service';
-import { combineLatest, map, Observable, of, Subject, switchMap } from 'rxjs';
+import {
+  combineLatest,
+  filter,
+  map,
+  mergeMap,
+  Observable,
+  of,
+  Subject,
+  switchMap,
+} from 'rxjs';
 import { Comment } from '../types';
 
 interface CommentsState {
-  loading: Map<number, boolean>;
   comments: Map<number, Comment[]>;
 }
 
 const initialState: CommentsState = {
-  loading: new Map<number, boolean>(),
   comments: new Map<number, Comment[]>(),
 };
 
 @Injectable()
 export class CommentsStateService extends StateService<CommentsState> {
-  loading$ = this.select((state) => state.loading);
+  private loadedCommentsPostIds: number[] = [];
 
   private allComments$ = this.select((state) => state.comments);
 
   private _loadCommentsByPostIdAction = new Subject<number>();
-  private loadCommentsByPostIdAction$ =
-    this._loadCommentsByPostIdAction.asObservable();
+  private loadCommentsByPostIdAction$ = this._loadCommentsByPostIdAction
+    .asObservable()
+    .pipe(
+      filter((postId) => !this.loadedCommentsPostIds.includes(postId)),
+      mergeMap((postId) => {
+        if (postId === 0) return of([]);
 
-  private loadedCommentsByPostId$ = combineLatest([
-    this.allComments$,
-    this.loadCommentsByPostIdAction$,
-  ]).pipe(
-    map(([comments, postId]) => {
-      return {
-        comments,
-        postId,
-      };
-    }),
-    switchMap(({ comments, postId }) => {
-      if (postId === 0 || comments.get(postId)) return of([]);
-
-      return this.service.getCommentsByPostId(postId);
-    })
-  );
+        return this.service.getCommentsByPostId(postId);
+      })
+    );
 
   private setCommentsState$ = combineLatest([
     this.allComments$,
-    this.loadedCommentsByPostId$,
+    this.loadCommentsByPostIdAction$,
   ]).pipe(
     map(([comments, loadedComments]) => {
       return {
@@ -51,12 +49,13 @@ export class CommentsStateService extends StateService<CommentsState> {
         loadedComments,
       };
     }),
+    filter(({ loadedComments }) => !!loadedComments.length),
     switchMap(({ comments, loadedComments }) => {
       const allComments = new Map<number, Comment[]>(comments);
 
-      if (!loadedComments.length) return allComments;
-
       const loadedCommentsPostId = loadedComments[0].postId;
+
+      this.loadedCommentsPostIds.push(loadedCommentsPostId);
 
       allComments.set(loadedCommentsPostId, loadedComments);
 
@@ -74,7 +73,11 @@ export class CommentsStateService extends StateService<CommentsState> {
   }
 
   private setCommentsState(comments: Map<number, Comment[]>): void {
-    this.setState({ comments });
+    const commentsOrderedByKey = new Map(
+      [...comments.entries()].sort((a, b) => a[0] - b[0])
+    );
+
+    this.setState({ comments: commentsOrderedByKey });
   }
 
   loadCommentsByPostId(id: number): void {
