@@ -5,9 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('../../libs/blog-posts/blog-posts.module').then(
-        (module) => module.BlogPostsModule
-      ),
+      import('projects/posts').then((module) => module.BlogPostsModule),
   },
 ];
 
